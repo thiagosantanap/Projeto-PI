@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.button_login:
                 // Execute um Comando
+
+                startActivity(new Intent(this, LoginEmailActivity.class));
+
                 break;
 
             // Caso a view seja o botão de cadastrar
