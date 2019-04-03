@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "777853753441",
+    "firebase_url": "https://gumplus-9d995.firebaseio.com",
+    "project_id": "gumplus-9d995",
+    "storage_bucket": "gumplus-9d995.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777853753441:android:c3074e1583bb5f7c",
+        "android_client_info": {
+          "package_name": "com.example.gymplus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777853753441-r5hgr20lviaphnus3eou07g3q6uj98g4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gymplus",
+            "certificate_hash": "7579c25ace47df029b64d478849f0e52ba63c8d1"
+          }
+        },
+        {
+          "client_id": "777853753441-bi4hvsgsnj5j29b9ejetre7ml37psgit.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk9Ln6OPOBG0WUhYb-4n5XbOZQHHCwXrs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777853753441-bi4hvsgsnj5j29b9ejetre7ml37psgit.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
