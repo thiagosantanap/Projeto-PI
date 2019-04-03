@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class PrincipalActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button button_Deslogar;
+    private GoogleSignInClient googleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,15 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
         switch (view.getId()){
             case R.id.button_Deslogar:
                 FirebaseAuth.getInstance().signOut();
+
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build();
+
+                googleSignInClient = GoogleSignIn.getClient(this, gso);
+
+                googleSignInClient.signOut();
                 finish();
                 break;
         }

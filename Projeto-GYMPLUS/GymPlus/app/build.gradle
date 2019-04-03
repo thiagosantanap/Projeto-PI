@@ -21,6 +21,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
 
     // Resolvendo Problema
 
@@ -39,6 +40,10 @@ dependencies {
     // FireBase Autenticação Por E-mail
 
     implementation 'com.google.firebase:firebase-auth:16.2.0'
+
+    // Login Gmail
+
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
 }
 
