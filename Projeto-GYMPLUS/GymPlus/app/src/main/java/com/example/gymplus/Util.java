@@ -9,7 +9,6 @@ import static android.content.Context.CONNECTIVITY_SERVICE;
 
 public class Util {
 
-
     public static boolean verificarInternet(Context context){
 
         ConnectivityManager conexao = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
@@ -57,12 +56,4 @@ public class Util {
             Toast.makeText(context, resposta, Toast.LENGTH_LONG).show();
         }
     }
-
-
-
-
-
-
-
-
 }
