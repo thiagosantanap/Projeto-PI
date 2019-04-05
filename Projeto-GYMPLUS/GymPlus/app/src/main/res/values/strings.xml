@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">GymPlus</string>
+    <string name="facebook_app_id">394150734498557</string>
+    <string name="fb_login_protocol_scheme">fb394150734498557</string>
+
 </resources>

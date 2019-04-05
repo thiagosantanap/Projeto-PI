@@ -11,6 +11,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -20,22 +26,24 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     // Criando Botões.
 
     private Button button_Login, button_Cadastrar;
-    private CardView cardView_LoginGoogle;
+    private CardView cardView_LoginFacebook, cardView_LoginGoogle;
     private FirebaseAuth auth;
     private FirebaseUser user;
-
     private GoogleSignInClient googleSignInClient;
-
     private FirebaseAuth.AuthStateListener authStateListener;
+    private CallbackManager callbackManager; // Gerenciador de resposta de chamadas - Armazena a resposta do facebook
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button_Cadastrar = (Button)findViewById(R.id.button_cadastrar );                // Pegando botão de Cadastro
 
         cardView_LoginGoogle = (CardView)findViewById(R.id.cardView_LoginGoogle);
+        cardView_LoginFacebook = (CardView)findViewById(R.id.cardView_LogiFacebook);
 
         // Implementando o Click no botão - Existem duas formas de fazer isso.
 
@@ -77,17 +86,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         button_Login.setOnClickListener(this);
         button_Cadastrar.setOnClickListener(this);
+        cardView_LoginFacebook.setOnClickListener(this);
         cardView_LoginGoogle.setOnClickListener(this);
 
         auth = FirebaseAuth.getInstance();
 
         servicosAutenticacao();
-
+        servicosFacebook();
         servicosGoogle();
 
     }
 
     // ------------------------------------------------------------ SERVIÇOS LOGIN ------------------------------------------------------------
+
+    private void servicosFacebook(){
+
+        callbackManager = CallbackManager.Factory.create();
+
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                AccessToken count = loginResult.getAccessToken();
+                adicionarContaFacebookFirebase(count);
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(getBaseContext(), "Cancelado.", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Toast.makeText(getBaseContext(), "Error ao fazer login com Facebook.", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
 
     private void servicosGoogle(){
 
@@ -122,6 +156,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Pegando o Id da view e para cada Id estamos implementando algo.
         switch (view.getId()){
             // Caso a view seja o botão de login
+            case R.id.cardView_LogiFacebook:
+                signInFacebook();
+                break;
             case R.id.cardView_LoginGoogle:
                 signInGoogle();
                 break;
@@ -138,6 +175,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // ------------------------------------------------------------ MÉTODOS DE LOGIN ------------------------------------------------------------
+
+    private void signInFacebook(){
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"));
+    }
 
     private void signInGoogle(){
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
@@ -170,6 +211,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // ------------------------------------------------------------ AUTENTICAÇÃO NO FIREBASE ------------------------------------------------------------
 
+    private void adicionarContaFacebookFirebase(AccessToken token) {
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            startActivity(new Intent(getBaseContext(), PrincipalActivity.class));
+                        } else {
+                            Toast.makeText(getBaseContext(), "Error ao Criar Conta Facebook.", Toast.LENGTH_LONG).show();
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
     private void adicionarContaGoogleFirebase(GoogleSignInAccount acct) {
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -192,6 +251,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 555){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
