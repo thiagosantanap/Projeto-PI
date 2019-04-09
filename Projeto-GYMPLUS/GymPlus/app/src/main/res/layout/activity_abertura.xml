@@ -5,11 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@drawable/grad_bg"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
     tools:context=".Abertura">
 
     <ImageView
-        android:layout_width="300dp"
+        android:layout_width="333dp"
         android:layout_height="300dp"
-        android:src="@drawable/pai"/>
+        android:src="@drawable/ic_as" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_Abertura"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progressDrawable="@drawable/progressbar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seja Bem-Vindo!"
+        android:textAlignment="center"
+        android:textColor="@color/colorBranco"
+        android:textSize="35sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

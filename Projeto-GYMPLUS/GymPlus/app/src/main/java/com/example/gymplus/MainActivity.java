@@ -37,12 +37,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // Criando Botões.
 
-    private Button button_Login, button_Cadastrar;
-    private CardView cardView_LoginFacebook, cardView_LoginGoogle;
+    private CardView cardView_LoginEmail, cardView_Cadastrar, cardView_LoginFacebook, cardView_LoginGoogle;
+
     private FirebaseAuth auth;
     private FirebaseUser user;
     private GoogleSignInClient googleSignInClient;
+
     private FirebaseAuth.AuthStateListener authStateListener;
+
     private CallbackManager callbackManager; // Gerenciador de resposta de chamadas - Armazena a resposta do facebook
 
     @Override
@@ -51,18 +53,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
-        // Desenvolvendo Botões de Login - "Pegando Botões".
-
-        button_Login = (Button)findViewById(R.id.button_login);                         // Pegando botão de Login - (Button) é um casting.
-        button_Cadastrar = (Button)findViewById(R.id.button_cadastrar );                // Pegando botão de Cadastro
-
+        cardView_LoginEmail = (CardView)findViewById(R.id.cardView_LoginEmail);
+        cardView_Cadastrar = (CardView)findViewById(R.id.cardView_Cadastrar);
         cardView_LoginGoogle = (CardView)findViewById(R.id.cardView_LoginGoogle);
-        cardView_LoginFacebook = (CardView)findViewById(R.id.cardView_LogiFacebook);
-
-        // Implementando o Click no botão - Existem duas formas de fazer isso.
-
+        cardView_LoginFacebook = (CardView)findViewById(R.id.cardView_LoginFacebook);
 
         /*
+
+        Implementando o Click no botão - Existem duas formas de fazer isso.
 
         Primeira forma. Não é tão aconselhável...
 
@@ -84,8 +82,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Segunda Forma. Mais indicada.
 
-        button_Login.setOnClickListener(this);
-        button_Cadastrar.setOnClickListener(this);
+        cardView_LoginEmail.setOnClickListener(this);
+        cardView_Cadastrar.setOnClickListener(this);
         cardView_LoginFacebook.setOnClickListener(this);
         cardView_LoginGoogle.setOnClickListener(this);
 
@@ -106,19 +104,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                AccessToken count = loginResult.getAccessToken();
-                adicionarContaFacebookFirebase(count);
+
+                adicionarContaFacebookFirebase(loginResult.getAccessToken());
             }
 
             @Override
             public void onCancel() {
-                Toast.makeText(getBaseContext(), "Cancelado.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(),"Cancelado" , Toast.LENGTH_LONG).show();
+
             }
 
             @Override
             public void onError(FacebookException error) {
-                Toast.makeText(getBaseContext(), "Error ao fazer login com Facebook.", Toast.LENGTH_LONG).show();
+
+                String resultado = error.getMessage();
+                Util.opcError(getBaseContext(),resultado);
+
             }
+
         });
 
     }
@@ -142,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null){
-                    Toast.makeText(getBaseContext(), "Usuário " + user.getEmail() + " está logado.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "Login realizado com sucesso!", Toast.LENGTH_LONG).show();
                 }else{
                 }
             }
@@ -156,17 +159,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Pegando o Id da view e para cada Id estamos implementando algo.
         switch (view.getId()){
             // Caso a view seja o botão de login
-            case R.id.cardView_LogiFacebook:
-                signInFacebook();
+            case R.id.cardView_LoginFacebook:
+                signInFacebook(); // Inicializando conversa com Facebook
                 break;
             case R.id.cardView_LoginGoogle:
                 signInGoogle();
                 break;
-            case R.id.button_login:
+            case R.id.cardView_LoginEmail:
                 signInEmail();
                 break;
             // Caso a view seja o botão de cadastrar
-            case R.id.button_cadastrar:
+            case R.id.cardView_Cadastrar:
                 // Execute um Comando
                 startActivity(new Intent(this, CadastrarActivity.class));
                 break;
@@ -177,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // ------------------------------------------------------------ MÉTODOS DE LOGIN ------------------------------------------------------------
 
     private void signInFacebook(){
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"));
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile","email"));
     }
 
     private void signInGoogle(){
@@ -189,7 +192,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else{
             // Já existe alguém conectado pelo Google
             Toast.makeText(getBaseContext(), "Usuário já logado.", Toast.LENGTH_LONG).show();
-
             startActivity(new Intent(getBaseContext(), PrincipalActivity.class));
 
             // googleSignInClient.signOut();
@@ -205,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else {
             // Execute um Comando
+            finish();
             startActivity(new Intent(this, PrincipalActivity.class));
         }
     }
@@ -219,11 +222,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            startActivity(new Intent(getBaseContext(), PrincipalActivity.class));
+                            finish();
+                            startActivity(new Intent(getBaseContext(),PrincipalActivity.class));
                         } else {
-                            Toast.makeText(getBaseContext(), "Error ao Criar Conta Facebook.", Toast.LENGTH_LONG).show();
+                            String resultado = task.getException().toString();
+                            Util.opcError(getBaseContext(),resultado);
                         }
-
                         // ...
                     }
                 });
@@ -237,6 +241,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            finish();
                             startActivity(new Intent(getBaseContext(), PrincipalActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
@@ -252,14 +257,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
-
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 555){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try{
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 adicionarContaGoogleFirebase(account);
-
             }catch (ApiException e){
                 Toast.makeText(getBaseContext(), "Error ao Logar com Conta no Google.", Toast.LENGTH_LONG).show();
             }

@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.gymplus">
 
-
     <uses-permission android:name="android.permission.INTERNET"/>
-
 
     <application
         android:allowBackup="true"
@@ -13,17 +11,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:launchMode="singleTop"
         android:theme="@style/AppTheme">
-
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"
-            tools:replace="android:value"/>
-
-
-        <activity android:name=".Abertura"></activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".LoginEmailActivity"></activity>
         <activity android:name=".PrincipalActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Abertura">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,6 +24,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".CadastrarActivity" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"
+            tools:replace="android:value"/>
     </application>
 
 </manifest>

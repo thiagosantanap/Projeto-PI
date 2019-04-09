@@ -4,8 +4,10 @@ buildscript {
     repositories {
         google()
         jcenter()
+
+        // Maven Cetral Facebook
+
         mavenCentral()
-        
     }
     dependencies {
 

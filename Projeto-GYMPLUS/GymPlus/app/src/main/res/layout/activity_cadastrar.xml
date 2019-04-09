@@ -1,61 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:padding="10dp"
-    android:background="@color/colorBackgroud"
+    android:background="@drawable/grad_bg"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/logosportclub"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="111dp"
+            android:layout_height="44dp"
+            android:text="Bem Vindo ao Sport Club"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="#ffff"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="160dp"/>
+
+    </LinearLayout>
     
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="E-mail"/>
+
     <EditText
         android:id="@+id/editText_EmailCadastro"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:background="#11000000"
+        android:drawableLeft="@drawable/ic_person_black_24dp"
+        android:ems="20"
         android:inputType="textEmailAddress"
+        android:textColorHint="#ffff"
+        android:drawableTint="#ffffff"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:drawableStart="@drawable/ic_person_black_24dp"
         android:hint="Insira um E-mail"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Senha"/>
+
     <EditText
         android:id="@+id/editText_SenhaCadastro"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="#11000000"
+        android:ems="20"
+        android:textColorHint="#ffff"
         android:inputType="textPassword"
-        android:layout_height="wrap_content"
-        android:hint="Insira uma Senha"/>
+        android:drawableTint="#ffffff"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:drawableStart="@drawable/ic_password_black_24dp"
+        android:drawableLeft="@drawable/ic_password_black_24dp"
+        android:hint="Insira sua Senha"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Repetir Senha"/>
     <EditText
         android:id="@+id/editText_SenhaRepetirCadastro"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="#11000000"
+        android:ems="20"
+        android:textColorHint="#ffff"
         android:inputType="textPassword"
-        android:layout_height="wrap_content"
+        android:drawableTint="#ffffff"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:drawableStart="@drawable/ic_password_black_24dp"
+        android:drawableLeft="@drawable/ic_password_black_24dp"
         android:hint="Repita sua Senha"/>
-    
-    <Button
-        android:id="@+id/button_CadastrarUsuario"
-        android:layout_width="200dp"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="Cadastrar"/>
 
-    <Button
-        android:id="@+id/button_Cancelar"
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView_CadastrarUsuario"
         android:layout_width="200dp"
-        android:textAllCaps="false"
         android:layout_height="wrap_content"
-        android:text="Cancelar"/>
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="7dp"
+        app:cardUseCompatPadding="true"
+        android:clickable="true"
+        android:focusable="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cadastrar"
+                android:textAllCaps="false"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textAlignment="center"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView_Cancelar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="7dp"
+        app:cardUseCompatPadding="true"
+        android:clickable="true"
+        android:focusable="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:textAllCaps="false"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textAlignment="center"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

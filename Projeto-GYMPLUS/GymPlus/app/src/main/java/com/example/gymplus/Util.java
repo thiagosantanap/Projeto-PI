@@ -9,6 +9,7 @@ import static android.content.Context.CONNECTIVITY_SERVICE;
 
 public class Util {
 
+
     public static boolean verificarInternet(Context context){
 
         ConnectivityManager conexao = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
@@ -52,8 +53,13 @@ public class Util {
         else if(resposta.contains("EMAIL_NOT_FOUND")){
             Toast.makeText(context, "Este E-mail não está cadastrado ainda.", Toast.LENGTH_LONG).show();
         }
+        // -----------------------------------------------------------------------------------------------------
+        else if(resposta.contains("exists with the same email address")){
+            Toast.makeText(context, "Error - E-mail já cadastrado, porém com credenciais diferentes.", Toast.LENGTH_LONG).show();
+        }
         else{
             Toast.makeText(context, resposta, Toast.LENGTH_LONG).show();
         }
     }
+
 }

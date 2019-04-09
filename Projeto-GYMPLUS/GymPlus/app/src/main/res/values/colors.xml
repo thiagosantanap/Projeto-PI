@@ -6,5 +6,13 @@
     <color name="colorFacebook">#3b5998</color>
     <color name="colorBranco">#fff</color>
     <color name="colorBackgroud">#87CEFA</color>
-    
+    <color name="gradStart">#7DBFF5</color>
+    <color name="gradStop">#7DBFF5</color>
+    <color name="color_1">#0288D1</color>
+    <color name="color_2">#01579B</color>
+    <color name="color_inicio">#81D4FA</color>
+    <color name="color_meio">#29B6F6</color>
+    <color name="color_fim">#673AB7</color>
+
+
 </resources>

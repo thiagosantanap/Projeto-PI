@@ -1,11 +1,13 @@
 package com.example.gymplus;
 
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,10 +18,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CadastrarActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editText_Email, editText_Senha, editText_SenhaRepetir;
-    private Button button_Cadastrar, button_Cancelar;
+    private CardView cardView_CadastrarUser, cardViewCancelar;
     private FirebaseAuth auth;
 
     @Override
@@ -31,10 +36,11 @@ public class CadastrarActivity extends AppCompatActivity implements View.OnClick
         editText_Senha = (EditText)findViewById(R.id.editText_SenhaCadastro);
         editText_SenhaRepetir = (EditText)findViewById(R.id.editText_SenhaRepetirCadastro);
 
-        button_Cadastrar = (Button)findViewById(R.id.button_CadastrarUsuario);
-        button_Cancelar = (Button)findViewById(R.id.button_Cancelar);
+        cardView_CadastrarUser = (CardView) findViewById(R.id.cardView_CadastrarUsuario);
+        cardViewCancelar = (CardView)findViewById(R.id.cardView_Cancelar);
 
-        button_Cadastrar.setOnClickListener(this);
+        cardView_CadastrarUser.setOnClickListener(this);
+        cardViewCancelar.setOnClickListener(this);
 
         auth = FirebaseAuth.getInstance();
     }
@@ -42,9 +48,14 @@ public class CadastrarActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.button_CadastrarUsuario:
+            case R.id.cardView_CadastrarUsuario:
                 // Execute um Comando
                 cadastrar();
+                break;
+
+            case R.id.cardView_Cancelar:
+                Intent voltar = new Intent(CadastrarActivity.this, MainActivity.class);
+                startActivity(voltar);
                 break;
         }
     }
@@ -60,20 +71,39 @@ public class CadastrarActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(getBaseContext(), "Error - Preencha os campos.", Toast.LENGTH_LONG).show();
         }else{
             // Caso a condição de estar nulo seja False, então podemos verificar se as senhas são iguais.
-            // Verificando se as senhas são iguais.
-            if(senha.contentEquals(confirmando)){
-                // Se tudo estiver okay criamos o usuário.
-                if(Util.verificarInternet(this)) {
-                    criarUsuario(email, senha);
+            if(email.contains(" ")){
+                Toast.makeText(getBaseContext(), "Digite um E-mail sem espaços.", Toast.LENGTH_LONG).show();
+            }else if(email.contains("-") || email.contains(";") || email.contains("-") || email.contains(";")){
+                Toast.makeText(getBaseContext(), "Seu E-mail possui caracter inválido.", Toast.LENGTH_LONG).show();
+            } else{
+                // Verificando se as senhas são iguais.
+                if(senha.contentEquals(confirmando)){
+                    // Se tudo estiver okay criamos o usuário.
+                    int count = 0;
+                    for (int i=0;i<senha.length();i++){
+                        if (validatePassword(senha)){
+                            count++;
+                        }
+                    }
+
+                    if(count == 6) {
+                        Toast.makeText(getBaseContext(), "Senha Fraca!", Toast.LENGTH_LONG).show();
+
+                    }else {
+                        if(Util.verificarInternet(this)) {
+                            criarUsuario(email, senha);
+                        }else{
+                            Toast.makeText(getBaseContext(), "Error - Verifique se seu WIFI ou 3G está funcionando.", Toast.LENGTH_LONG).show();
+                        }
+                    }
                 }else{
-                    Toast.makeText(getBaseContext(), "Error - Verifique se seu WIFI ou 3G está funcionando.", Toast.LENGTH_LONG).show();
+                    // Se não forem iguais exibe um Toast de erro.
+                    Toast.makeText(getBaseContext(), "Error - Senhas diferentes.", Toast.LENGTH_LONG).show();
                 }
-            }else{
-                // Se não forem iguais exibe um Toast de erro.
-                Toast.makeText(getBaseContext(), "Error - Senhas diferentes.", Toast.LENGTH_LONG).show();
             }
         }
     }
+
 
     private void criarUsuario(String email, String senha){
         auth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -89,6 +119,12 @@ public class CadastrarActivity extends AppCompatActivity implements View.OnClick
                 }
             }
         });
+    }
+
+    public static boolean validatePassword(final String password){
+        Pattern p = Pattern.compile("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$");
+        Matcher m = p.matcher(password);
+        return m.matches();
     }
 }
 
