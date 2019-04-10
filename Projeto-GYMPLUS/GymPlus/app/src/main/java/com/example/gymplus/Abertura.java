@@ -18,62 +18,42 @@ import com.google.firebase.auth.FirebaseUser;
 // Caso ele faça o Login correte, então vai para a PrincipalActivity.
 
 public class Abertura extends AppCompatActivity implements Runnable{
-
     private ProgressBar progressBar;
     private Thread thread;
     private Handler handler;
     private int contador;
-
     private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abertura);
-
         auth = FirebaseAuth.getInstance();
-
         progressBar = (ProgressBar)findViewById(R.id.progressBar_Abertura);
-
         handler = new Handler(); // Handler significa manipulador - Ele ficará responsável por entregar as mensagens para dentro da Thread
         thread = new Thread(this);
-
         // Iniciando Thread
-
         thread.start();
-
     }
 
     @Override
     public void run() {
-
         // Inicializando contador
-
         contador = 1;
-
         // Tratar erros...
-
         try{
             while(contador <= 100){
-
                 Thread.sleep(30); // Pausando por um determinado tempo
-
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-
                         // Incrementando contador
-
                         contador += 1; // Fila de mensagens
-
                         progressBar.setProgress(contador);
                     }
                 });
-
             }
-
             FirebaseUser user = auth.getCurrentUser();
-
             if(user == null){
                 finish();
                 startActivity(new Intent(getBaseContext(), MainActivity.class));
@@ -81,10 +61,8 @@ public class Abertura extends AppCompatActivity implements Runnable{
                 finish();
                 startActivity(new Intent(getBaseContext(), PrincipalActivity.class));
             }
-
-        }catch (InterruptedException e){
-
         }
-
+        catch (InterruptedException e){
+        }
     }
 }

@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/grad_bg"
-    tools:context=".LoginEmailActivity">
+    tools:context=".RecuperarActivity">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="440dp"
         android:layout_centerInParent="true"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp">
@@ -22,18 +22,19 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginStart="115dp"
-            android:layout_marginLeft="115dp"
-            android:layout_marginEnd="115dp"
-            android:layout_marginRight="115dp"
+            android:layout_marginStart="118dp"
+            android:layout_marginLeft="118dp"
+            android:layout_marginEnd="112dp"
+            android:layout_marginRight="112dp"
             android:gravity="center"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_as" />
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
             android:layout_below="@+id/imgView_logo"
+            android:layout_marginTop="84dp"
             android:gravity="center">
 
             <LinearLayout
@@ -66,94 +67,42 @@
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:layout_margin="10dp"
                             android:layout_marginTop="300dp"
+                            android:gravity="center"
                             android:hint="@string/email_2"
                             android:textColor="@color/colorBranco"
                             android:textColorHint="@color/colorBranco"
-                            android:theme="@style/TextLabel"
-                            android:layout_margin="10dp">
+                            android:theme="@style/TextLabel">
 
                             <EditText
-                                android:id="@+id/editText_EmailLogin"
+                                android:id="@+id/editText_EmailRecuperar"
                                 android:layout_width="310dp"
                                 android:layout_height="48dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="24dp"
-                                android:fontFamily="sans-serif-light"
                                 android:background="@drawable/et_bg"
                                 android:drawableStart="@drawable/ic_person_black_24dp"
                                 android:drawableLeft="@drawable/ic_person_black_24dp"
                                 android:ems="20"
+                                android:fontFamily="sans-serif-light"
+                                android:inputType="textEmailAddress"
+                                android:outlineAmbientShadowColor="@color/colorBranco"
+                                android:outlineSpotShadowColor="@color/colorBranco"
+                                android:padding="10dp"
                                 android:shadowColor="@color/colorBranco"
                                 android:textColor="@color/colorBranco"
-                                android:textColorHint="@color/colorBranco"
-                                android:outlineSpotShadowColor="@color/colorBranco"
-                                android:outlineAmbientShadowColor="@color/colorBranco"
                                 android:textColorHighlight="@color/colorBranco"
-                                android:textColorLink="@color/colorBranco"
-                                android:padding="10dp"
-                                android:inputType="textEmailAddress"/>
+                                android:textColorHint="@color/colorBranco"
+                                android:textColorLink="@color/colorBranco" />
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Senha"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="15sp" />
-
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:passwordToggleEnabled="true"
-                        android:gravity="center"
-                        android:theme="@style/TextLabel"
-                        android:layout_marginTop="300dp"
-                        android:hint="@string/senha_2"
-                        android:textColor="@color/colorBranco"
-                        android:textColorHint="@color/colorBranco"
-                        app:passwordToggleTint="@color/colorBranco"
-                        android:layout_margin="10dp">
-                        <EditText
-                            android:id="@+id/editText_SenhaLogin"
-                            android:layout_width="310dp"
-                            android:layout_height="48dp"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="15dp"
-                            android:background="@drawable/et_bg"
-                            android:fontFamily="sans-serif-light"
-                            android:shadowColor="@color/colorBranco"
-                            android:textColor="@color/colorBranco"
-                            android:textColorHint="@color/colorBranco"
-                            android:outlineSpotShadowColor="@color/colorBranco"
-                            android:outlineAmbientShadowColor="@color/colorBranco"
-                            android:textColorHighlight="@color/colorBranco"
-                            android:textColorLink="@color/colorBranco"
-                            android:padding="10dp"
-                            android:drawableStart="@drawable/ic_password_black_24dp"
-                            android:drawableLeft="@drawable/ic_password_black_24dp"
-                            android:ems="20"
-                            android:inputType="textPassword"/>
-                    </android.support.design.widget.TextInputLayout>
-
                 </LinearLayout>
 
             </LinearLayout>
 
             <Button
-                android:id="@+id/button_OkLogin"
+                android:id="@+id/button_enviar_email_recuperar"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_below="@+id/linlay1"
@@ -163,12 +112,38 @@
                 android:fontFamily="sans-serif-medium"
                 android:paddingLeft="70dp"
                 android:paddingRight="70dp"
-                android:text="@string/login"
+                android:text="Recuperar"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="296dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/imgView_logo"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="19dp"
+            android:layout_marginLeft="19dp"
+            android:layout_marginTop="47dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="165dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:lineSpacingExtra="18sp"
+            android:text="Favor informar seu e-mail"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@color/colorBranco"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="serif"/>
 
     </RelativeLayout>
 
@@ -182,25 +157,13 @@
         android:layout_marginRight="20dp">
 
         <Button
-            android:id="@+id/button_okCadastrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="235dp"
-            android:background="@color/transparent"
-            android:fontFamily="sans-serif"
-            android:text="Cadastrar?"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@color/transparent"
-            android:id="@+id/button_RecuperarSenha"
+            android:id="@+id/button_cancelar_recuperacao"
             android:fontFamily="sans-serif"
-            android:text="@string/esqueceu_senha"
+            android:text="Cancelar"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 

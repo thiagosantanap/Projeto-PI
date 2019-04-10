@@ -20,24 +20,24 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginEmailActivity extends AppCompatActivity implements View.OnClickListener {
-
     private EditText editText_EmailLogin, editText_SenhaLogin;
-    private Button button_OkLogin, button_RecuperarSenha;
+    private Button button_OkLogin, button_RecuperarSenha, button_Cadastrar;
     private FirebaseAuth auth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         editText_EmailLogin = (EditText)findViewById(R.id.editText_EmailLogin);
         editText_SenhaLogin = (EditText)findViewById(R.id.editText_SenhaLogin);
 
         button_OkLogin = (Button)findViewById(R.id.button_OkLogin);
         button_RecuperarSenha = (Button)findViewById(R.id.button_RecuperarSenha);
+        button_Cadastrar = (Button)findViewById(R.id.button_okCadastrar) ;
 
         button_OkLogin.setOnClickListener(this);
         button_RecuperarSenha.setOnClickListener(this);
+        button_Cadastrar.setOnClickListener(this);
 
         auth = FirebaseAuth.getInstance();
     }
@@ -48,37 +48,16 @@ public class LoginEmailActivity extends AppCompatActivity implements View.OnClic
             case R.id.button_OkLogin:
                 loginEmail();
                 break;
+             case R.id.button_okCadastrar:
+                startActivity(new Intent(this, CadastrarActivity.class));
+                finish();
+                break;
             case R.id.button_RecuperarSenha:
-                recuperarSenha();
+                startActivity(new Intent(this, RecuperarActivity.class));
+                finish();
                 break;
         }
     }
-
-    private void recuperarSenha() {
-        String email = editText_EmailLogin.getText().toString().trim();
-        if(email.isEmpty()){
-            // Essa condição verifica se algum campo está nulo. Se estiver nulo apresenta uma mensagem.
-            Toast.makeText(getBaseContext(), "Insira pelo menos seu E-mail para poder Recuperar sua senha.", Toast.LENGTH_LONG).show();
-        }else{
-            enviarEmail(email);
-        }
-    }
-
-    private void enviarEmail(String email){
-        auth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(getBaseContext(), "Enviamos uma mensagem para seu Email de redefinição de senha.", Toast.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                String error = e.toString();
-                Util.opcError(getBaseContext(), error);
-            }
-        });
-    }
-
 
     private void loginEmail(){
         String email = editText_EmailLogin.getText().toString().trim();

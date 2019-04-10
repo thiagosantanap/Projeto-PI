@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -36,28 +35,21 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     // Criando Botões.
-
     private CardView cardView_LoginEmail, cardView_Cadastrar, cardView_LoginFacebook, cardView_LoginGoogle;
-
     private FirebaseAuth auth;
     private FirebaseUser user;
     private GoogleSignInClient googleSignInClient;
-
     private FirebaseAuth.AuthStateListener authStateListener;
-
     private CallbackManager callbackManager; // Gerenciador de resposta de chamadas - Armazena a resposta do facebook
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         cardView_LoginEmail = (CardView)findViewById(R.id.cardView_LoginEmail);
         cardView_Cadastrar = (CardView)findViewById(R.id.cardView_Cadastrar);
         cardView_LoginGoogle = (CardView)findViewById(R.id.cardView_LoginGoogle);
         cardView_LoginFacebook = (CardView)findViewById(R.id.cardView_LoginFacebook);
-
         /*
 
         Implementando o Click no botão - Existem duas formas de fazer isso.
@@ -81,64 +73,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         */
 
         // Segunda Forma. Mais indicada.
-
         cardView_LoginEmail.setOnClickListener(this);
         cardView_Cadastrar.setOnClickListener(this);
         cardView_LoginFacebook.setOnClickListener(this);
         cardView_LoginGoogle.setOnClickListener(this);
-
         auth = FirebaseAuth.getInstance();
-
         servicosAutenticacao();
         servicosFacebook();
         servicosGoogle();
-
     }
 
     // ------------------------------------------------------------ SERVIÇOS LOGIN ------------------------------------------------------------
 
     private void servicosFacebook(){
-
         callbackManager = CallbackManager.Factory.create();
-
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-
                 adicionarContaFacebookFirebase(loginResult.getAccessToken());
             }
-
             @Override
             public void onCancel() {
                 Toast.makeText(getBaseContext(),"Cancelado" , Toast.LENGTH_LONG).show();
-
             }
-
             @Override
             public void onError(FacebookException error) {
-
                 String resultado = error.getMessage();
                 Util.opcError(getBaseContext(),resultado);
-
             }
-
         });
-
     }
 
     private void servicosGoogle(){
-
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-
         googleSignInClient = GoogleSignIn.getClient(this, gso);
-
     }
 
     // Quando clickarmos no botão essa função vai ser chamada
-
     private void servicosAutenticacao(){
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -173,7 +147,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // Execute um Comando
                 startActivity(new Intent(this, CadastrarActivity.class));
                 break;
-
         }
     }
 
@@ -185,7 +158,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void signInGoogle(){
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-
         if(account == null){
             Intent intent = googleSignInClient.getSignInIntent();
             startActivityForResult(intent, 555);
@@ -193,9 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // Já existe alguém conectado pelo Google
             Toast.makeText(getBaseContext(), "Usuário já logado.", Toast.LENGTH_LONG).show();
             startActivity(new Intent(getBaseContext(), PrincipalActivity.class));
-
             // googleSignInClient.signOut();
-
         }
     }
 
@@ -215,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // ------------------------------------------------------------ AUTENTICAÇÃO NO FIREBASE ------------------------------------------------------------
 
     private void adicionarContaFacebookFirebase(AccessToken token) {
-
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -234,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void adicionarContaGoogleFirebase(GoogleSignInAccount acct) {
-
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -245,7 +213,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(getBaseContext(), PrincipalActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(getBaseContext(), "Error ao Criar Conta Google.", Toast.LENGTH_LONG).show();
+                            String resultado = task.getException().toString();
+                            Util.opcError(getBaseContext(),resultado);
                         }
                         // ...
                     }
@@ -264,7 +233,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 adicionarContaGoogleFirebase(account);
             }catch (ApiException e){
-                Toast.makeText(getBaseContext(), "Error ao Logar com Conta no Google.", Toast.LENGTH_LONG).show();
+                String resultado = e.getMessage();
+                Util.opcError(getBaseContext(), resultado);
             }
         }
     }

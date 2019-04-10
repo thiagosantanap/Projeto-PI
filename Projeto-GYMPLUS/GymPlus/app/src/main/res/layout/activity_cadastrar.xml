@@ -1,133 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:background="@drawable/grad_bg"
-    android:orientation="vertical">
+    tools:context=".LoginEmailActivity">
 
-    <LinearLayout
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="@drawable/logosportclub"
-        android:layout_gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="111dp"
-            android:layout_height="44dp"
-            android:text="Bem Vindo ao Sport Club"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="#ffff"
-            android:textSize="14sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="160dp"/>
-
-    </LinearLayout>
-    
-
-    <EditText
-        android:id="@+id/editText_EmailCadastro"
-        android:layout_width="350dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#11000000"
-        android:drawableLeft="@drawable/ic_person_black_24dp"
-        android:ems="20"
-        android:inputType="textEmailAddress"
-        android:textColorHint="#ffff"
-        android:drawableTint="#ffffff"
-        android:textColor="#ffffff"
-        android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:drawableStart="@drawable/ic_person_black_24dp"
-        android:hint="Insira um E-mail"/>
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
 
+        <ImageView
+            android:id="@+id/imgView_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="115dp"
+            android:layout_marginLeft="115dp"
+            android:layout_marginEnd="115dp"
+            android:layout_marginRight="115dp"
+            android:gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_as" />
 
-    <EditText
-        android:id="@+id/editText_SenhaCadastro"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:background="#11000000"
-        android:ems="20"
-        android:textColorHint="#ffff"
-        android:inputType="textPassword"
-        android:drawableTint="#ffffff"
-        android:textColor="#ffffff"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:drawableStart="@drawable/ic_password_black_24dp"
-        android:drawableLeft="@drawable/ic_password_black_24dp"
-        android:hint="Insira sua Senha"/>
-
-    <EditText
-        android:id="@+id/editText_SenhaRepetirCadastro"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:background="#11000000"
-        android:ems="20"
-        android:textColorHint="#ffff"
-        android:inputType="textPassword"
-        android:drawableTint="#ffffff"
-        android:textColor="#ffffff"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:drawableStart="@drawable/ic_password_black_24dp"
-        android:drawableLeft="@drawable/ic_password_black_24dp"
-        android:hint="Repita sua Senha"/>
-
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView_CadastrarUsuario"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="7dp"
-        app:cardUseCompatPadding="true"
-        android:clickable="true"
-        android:focusable="true">
-        <LinearLayout
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
+            android:layout_below="@+id/imgView_logo"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/linlay1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_login"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginTop="300dp"
+                            android:hint="@string/email"
+                            android:textColor="@color/colorBranco"
+                            android:textColorHint="@color/colorBranco"
+                            android:theme="@style/TextLabel"
+                            android:layout_margin="10dp">
+
+                            <EditText
+                                android:id="@+id/editText_EmailCadastro"
+                                android:layout_width="310dp"
+                                android:layout_height="48dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="24dp"
+                                android:fontFamily="sans-serif-light"
+                                android:background="@drawable/et_bg"
+                                android:drawableStart="@drawable/ic_person_black_24dp"
+                                android:drawableLeft="@drawable/ic_person_black_24dp"
+                                android:ems="20"
+                                android:shadowColor="@color/colorBranco"
+                                android:textColor="@color/colorBranco"
+                                android:textColorHint="@color/colorBranco"
+                                android:outlineSpotShadowColor="@color/colorBranco"
+                                android:outlineAmbientShadowColor="@color/colorBranco"
+                                android:textColorHighlight="@color/colorBranco"
+                                android:textColorLink="@color/colorBranco"
+                                android:padding="10dp"
+                                android:inputType="textEmailAddress"/>
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:passwordToggleEnabled="true"
+                        android:gravity="center"
+                        android:theme="@style/TextLabel"
+                        android:layout_marginTop="300dp"
+                        android:hint="@string/senha"
+                        android:textColor="@color/colorBranco"
+                        android:textColorHint="@color/colorBranco"
+                        app:passwordToggleTint="@color/colorBranco"
+                        android:layout_margin="10dp">
+                        <EditText
+                            android:id="@+id/editText_SenhaCadastro"
+                            android:layout_width="310dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/et_bg"
+                            android:fontFamily="sans-serif-light"
+                            android:shadowColor="@color/colorBranco"
+                            android:textColor="@color/colorBranco"
+                            android:textColorHint="@color/colorBranco"
+                            android:outlineSpotShadowColor="@color/colorBranco"
+                            android:outlineAmbientShadowColor="@color/colorBranco"
+                            android:textColorHighlight="@color/colorBranco"
+                            android:textColorLink="@color/colorBranco"
+                            android:padding="10dp"
+                            android:drawableStart="@drawable/ic_password_black_24dp"
+                            android:drawableLeft="@drawable/ic_password_black_24dp"
+                            android:ems="20"
+                            android:inputType="textPassword"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:passwordToggleEnabled="true"
+                        android:gravity="center"
+                        android:theme="@style/TextLabel"
+                        android:layout_marginTop="300dp"
+                        android:hint="@string/repitasenha"
+                        android:textColor="@color/colorBranco"
+                        android:textColorHint="@color/colorBranco"
+                        app:passwordToggleTint="@color/colorBranco"
+                        android:layout_margin="10dp">
+                        <EditText
+                            android:id="@+id/editText_SenhaRepetirCadastro"
+                            android:layout_width="310dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/et_bg"
+                            android:fontFamily="sans-serif-light"
+                            android:shadowColor="@color/colorBranco"
+                            android:textColor="@color/colorBranco"
+                            android:textColorHint="@color/colorBranco"
+                            android:outlineSpotShadowColor="@color/colorBranco"
+                            android:outlineAmbientShadowColor="@color/colorBranco"
+                            android:textColorHighlight="@color/colorBranco"
+                            android:textColorLink="@color/colorBranco"
+                            android:padding="10dp"
+                            android:drawableStart="@drawable/ic_password_black_24dp"
+                            android:drawableLeft="@drawable/ic_password_black_24dp"
+                            android:ems="20"
+                            android:inputType="textPassword"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/cardView_CadastrarUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@+id/linlay1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/btn_bg"
+                android:fontFamily="sans-serif-medium"
+                android:paddingLeft="70dp"
+                android:paddingRight="70dp"
                 android:text="Cadastrar"
                 android:textAllCaps="false"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView_Cancelar"
-        android:layout_width="200dp"
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rellay2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="7dp"
-        app:cardUseCompatPadding="true"
-        android:clickable="true"
-        android:focusable="true">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cancelar"
-                android:textAllCaps="false"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
 
-</LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:id="@+id/cardView_Cancelar"
+            android:fontFamily="sans-serif"
+            android:text="Cancelar?"
+            android:textAllCaps="true"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

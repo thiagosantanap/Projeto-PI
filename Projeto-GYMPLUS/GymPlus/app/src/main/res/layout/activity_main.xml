@@ -1,144 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/grad_bg"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".LoginEmailActivity">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView_LoginFacebook"
-        android:layout_width="200dp"
+    <TextView
+        android:layout_width="500dp"
+        android:gravity="center_horizontal"
+        android:textSize="30dp"
+        android:textColor="@color/colorBranco"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:text="Bem Vindo!"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="7dp"
-        app:cardUseCompatPadding="true"
-        android:clickable="true"
-        android:focusable="true">
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imgView_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="115dp"
+            android:layout_marginLeft="115dp"
+            android:layout_marginEnd="115dp"
+            android:layout_marginRight="115dp"
+            android:gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_as" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorFacebook"
-            android:orientation="vertical">
+            android:layout_below="@+id/imgView_logo"
+            android:gravity="center">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:src="@drawable/loginfacebook"
-                android:layout_gravity="center"/>
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/linlay1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login Facebook"
-                android:textColor="@color/colorBranco"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
+                android:layout_below="@+id/tv_login"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    </android.support.v7.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView_LoginGoogle"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="7dp"
-        app:cardUseCompatPadding="true"
-        android:clickable="true"
-        android:focusable="true">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:src="@drawable/face"
+                            android:layout_gravity="center"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardView_LoginFacebook"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="7dp"
+                            android:foregroundGravity="center"
+                            android:layout_gravity="center"
+                            app:cardUseCompatPadding="true"
+                            android:clickable="true"
+                            android:focusable="true">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:src="@drawable/logingoogle"
-                android:layout_gravity="center"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorFacebook"
+                                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Login Google"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Login Facebook"
+                                    android:textColor="@color/colorBranco"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:textAlignment="center"/>
 
-        </LinearLayout>
+                            </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView_LoginEmail"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="7dp"
-        app:cardUseCompatPadding="true"
-        android:clickable="true"
-        android:focusable="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:src="@drawable/gmail"
+                        android:layout_gravity="center"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:src="@drawable/loginemail"
-                android:layout_gravity="center"/>
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardView_LoginGoogle"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        android:foregroundGravity="center"
+                        android:layout_gravity="center"
+                        app:cardElevation="7dp"
+                        app:cardUseCompatPadding="true"
+                        android:clickable="true"
+                        android:focusable="true">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Login com E-mail"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-        </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Login Google"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textAlignment="center"/>
 
-    </android.support.v7.widget.CardView>
+                        </LinearLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView_Cadastrar"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="7dp"
-        app:cardUseCompatPadding="true"
-        android:clickable="true"
-        android:focusable="true">
+                    </android.support.v7.widget.CardView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cadastrar"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
 
-        </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:src="@drawable/email"
+                        android:layout_gravity="center"/>
 
-</LinearLayout>
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardView_LoginEmail"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:foregroundGravity="center"
+                        android:layout_gravity="center"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="7dp"
+                        app:cardUseCompatPadding="true"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Login E-mail"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:src="@drawable/add"
+                        android:layout_gravity="center"/>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardView_Cadastrar"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="7dp"
+                        android:foregroundGravity="center"
+                        android:layout_gravity="center"
+                        app:cardUseCompatPadding="true"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Cadastrar"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

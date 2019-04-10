@@ -22,26 +22,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CadastrarActivity extends AppCompatActivity implements View.OnClickListener {
-
     private EditText editText_Email, editText_Senha, editText_SenhaRepetir;
-    private CardView cardView_CadastrarUser, cardViewCancelar;
+    private Button cardView_CadastrarUser, cardViewCancelar;
     private FirebaseAuth auth;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar);
-
         editText_Email = (EditText)findViewById(R.id.editText_EmailCadastro);
         editText_Senha = (EditText)findViewById(R.id.editText_SenhaCadastro);
         editText_SenhaRepetir = (EditText)findViewById(R.id.editText_SenhaRepetirCadastro);
-
-        cardView_CadastrarUser = (CardView) findViewById(R.id.cardView_CadastrarUsuario);
-        cardViewCancelar = (CardView)findViewById(R.id.cardView_Cancelar);
-
+        cardView_CadastrarUser = (Button) findViewById(R.id.cardView_CadastrarUsuario);
+        cardViewCancelar = (Button)findViewById(R.id.cardView_Cancelar);
         cardView_CadastrarUser.setOnClickListener(this);
         cardViewCancelar.setOnClickListener(this);
-
         auth = FirebaseAuth.getInstance();
     }
 
@@ -52,7 +46,6 @@ public class CadastrarActivity extends AppCompatActivity implements View.OnClick
                 // Execute um Comando
                 cadastrar();
                 break;
-
             case R.id.cardView_Cancelar:
                 Intent voltar = new Intent(CadastrarActivity.this, MainActivity.class);
                 startActivity(voltar);
@@ -75,21 +68,55 @@ public class CadastrarActivity extends AppCompatActivity implements View.OnClick
                 Toast.makeText(getBaseContext(), "Digite um E-mail sem espaços.", Toast.LENGTH_LONG).show();
             }else if(email.contains("-") || email.contains(";") || email.contains("-") || email.contains(";")){
                 Toast.makeText(getBaseContext(), "Seu E-mail possui caracter inválido.", Toast.LENGTH_LONG).show();
-            } else{
+
+            }else if (senha.contains(" ")){
+                Toast.makeText(getBaseContext(), "Digite uma Senha sem espaços.", Toast.LENGTH_LONG).show();
+            }else{
                 // Verificando se as senhas são iguais.
                 if(senha.contentEquals(confirmando)){
-                    // Se tudo estiver okay criamos o usuário.
-                    int count = 0;
-                    for (int i=0;i<senha.length();i++){
-                        if (validatePassword(senha)){
-                            count++;
+                    // Varificando força da senha
+                    int count_caractere = senha.length();
+                    int pontuacao_count_caractere = count_caractere * 6;
+                    // System.out.println(pontuacao_count_caractere);
+                    if(pontuacao_count_caractere > 60){
+                        pontuacao_count_caractere = 60;
+                    }
+                    // System.out.println(pontuacao_count_caractere);
+                    int count_minuscula = validatePassword_minuscula(senha);
+                    int count_maiuscula = validatePassword_maiuscula(senha);
+                    int count_numeros = validatePassword_numeros(senha);
+                    int count_outros = validatePassword_outros(senha);
+                    int count_final = 0;
+                    count_final += pontuacao_count_caractere;
+                    if(count_minuscula != 0){
+                        count_final += 5;
+                    }
+                    if(count_maiuscula != 0){
+                        count_final += 5;
+                    }
+                    if(count_numeros != 0){
+                        count_final += 5;
+                    }
+                    if(count_outros != 0){
+                        count_final += 5;
+                        if(count_outros >= 2){
+                            count_final += 10;
                         }
                     }
-
-                    if(count == 6) {
-                        Toast.makeText(getBaseContext(), "Senha Fraca!", Toast.LENGTH_LONG).show();
-
+                    if(count_minuscula > count_maiuscula && count_minuscula > count_numeros && count_minuscula > count_outros){
+                        count_final += 10;
+                    }
+                    else if(count_maiuscula > count_minuscula && count_maiuscula > count_numeros && count_maiuscula > count_outros){
+                        count_final += 10;
+                    }
+                    else if(count_numeros > count_minuscula && count_numeros > count_maiuscula && count_numeros > count_outros){
+                        count_final += 10;
+                    }
+                    // System.out.println(count_final);
+                    if(count_final >= 0 && count_final <= 59) {
+                        Toast.makeText(getBaseContext(), "Senha Fraca! Escolha uma mais Forte", Toast.LENGTH_LONG).show();
                     }else {
+                        // Se tudo estiver okay criamos o usuário.
                         if(Util.verificarInternet(this)) {
                             criarUsuario(email, senha);
                         }else{
@@ -104,7 +131,6 @@ public class CadastrarActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-
     private void criarUsuario(String email, String senha){
         auth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -112,6 +138,8 @@ public class CadastrarActivity extends AppCompatActivity implements View.OnClick
                 // Se o usuáiro preencheu todos os campos.
                 if(task.isSuccessful()){
                     Toast.makeText(getBaseContext(), "Cadastro efetuado com Sucesso.", Toast.LENGTH_LONG).show();
+                    Intent ir = new Intent(CadastrarActivity.this, PrincipalActivity.class);
+                    startActivity(ir);
                 }else{
                     String resposta = task.getException().toString(); // A variável task é onde o firebase nos informa os erros que ocasionaram na hora de criar um usuário.
                     // Pegando string de erro do firebase e armazenando na variável resposta.
@@ -121,10 +149,60 @@ public class CadastrarActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
-    public static boolean validatePassword(final String password){
-        Pattern p = Pattern.compile("^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$");
-        Matcher m = p.matcher(password);
-        return m.matches();
+    public static int validatePassword_minuscula(final String password){
+        Pattern pattern = Pattern.compile("[a-z]+");
+        Matcher matcher = pattern.matcher(password);
+        String resultado;
+        int tamanho = 0;
+        while (matcher.find()) {
+            resultado = matcher.group();
+            for(int i = 0; i < resultado.length(); i++){
+                tamanho += 1;
+            }
+        }
+        return tamanho;
+    }
+
+    public static int validatePassword_maiuscula(final String password){
+        Pattern pattern = Pattern.compile("[A-Z]+");
+        Matcher matcher = pattern.matcher(password);
+        String resultado;
+        int tamanho = 0;
+        while (matcher.find()) {
+            resultado = matcher.group();
+            for(int i = 0; i < resultado.length(); i++){
+                tamanho += 1;
+            }
+        }
+        return tamanho;
+    }
+
+    public static int validatePassword_numeros(final String password){
+        Pattern pattern = Pattern.compile("[0-9]+");
+        Matcher matcher = pattern.matcher(password);
+        String resultado;
+        int tamanho = 0;
+        while (matcher.find()) {
+            resultado = matcher.group();
+            for(int i = 0; i < resultado.length(); i++){
+                tamanho += 1;
+            }
+        }
+        return tamanho;
+    }
+
+    public static int validatePassword_outros(final String password){
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9]+");
+        Matcher matcher = pattern.matcher(password);
+        String resultado;
+        int tamanho = 0;
+        while (matcher.find()) {
+            resultado = matcher.group();
+            for(int i = 0; i < resultado.length(); i++){
+                tamanho += 1;
+            }
+        }
+        return tamanho;
     }
 }
 
