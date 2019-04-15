@@ -43,7 +43,7 @@ public class Abertura extends AppCompatActivity implements Runnable{
         // Tratar erros...
         try{
             while(contador <= 100){
-                Thread.sleep(30); // Pausando por um determinado tempo
+                Thread.sleep(15); // Pausando por um determinado tempo
                 handler.post(new Runnable() {
                     @Override
                     public void run() {

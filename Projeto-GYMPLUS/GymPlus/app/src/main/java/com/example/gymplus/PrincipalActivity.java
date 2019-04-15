@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.gymplus.storage.StorageDownloadActivity;
+import com.example.gymplus.storage.StorageUploadActivity;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -14,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class PrincipalActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button button_Deslogar;
+    private Button button_Deslogar, botao_storage_download,botao_storage_upload, botao_database_ler, botao_database_alterar, botao_usuarios;
     private GoogleSignInClient googleSignInClient;
 
     @Override
@@ -25,6 +28,21 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
 
         button_Deslogar = (Button) findViewById(R.id.button_Deslogar);
         button_Deslogar.setOnClickListener(this);
+
+        botao_storage_download = (Button) findViewById(R.id.button_storage_download);
+        botao_storage_download.setOnClickListener(this);
+
+        botao_storage_upload = (Button) findViewById(R.id.button_storage_upload);
+        botao_storage_upload.setOnClickListener(this);
+
+        botao_database_ler = (Button) findViewById(R.id.button_database_ler);
+        botao_database_ler.setOnClickListener(this);
+
+        botao_database_alterar = (Button) findViewById(R.id.button_database_alterar);
+        botao_database_alterar.setOnClickListener(this);
+
+        botao_usuarios = (Button) findViewById(R.id.button_usuarios);
+        botao_usuarios.setOnClickListener(this);
 
     }
 
@@ -53,9 +71,27 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
                 // Finish
 
                 finish();
-
+                Toast.makeText(this, "Deslogado", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(getBaseContext(),MainActivity.class));
 
+                break;
+
+            case R.id.button_storage_download:
+                Toast.makeText(this, "Storage Download", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getBaseContext(), StorageDownloadActivity.class));
+                break;
+            case R.id.button_storage_upload:
+                Toast.makeText(this, "Storage Upload", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getBaseContext(), StorageUploadActivity.class));
+                break;
+            case R.id.button_database_ler:
+                Toast.makeText(this, "DataBase Ler", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.button_database_alterar:
+                Toast.makeText(this, "DataBase Alterar", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.button_usuarios:
+                Toast.makeText(this, "Usuários", Toast.LENGTH_LONG).show();
                 break;
         }
     }

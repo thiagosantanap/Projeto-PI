@@ -67,24 +67,24 @@
 
                             <EditText
                                 android:id="@+id/editText_EmailCadastro"
-                                android:layout_width="310dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="48dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="24dp"
-                                android:fontFamily="sans-serif-light"
                                 android:background="@drawable/et_bg"
                                 android:drawableStart="@drawable/ic_person_black_24dp"
                                 android:drawableLeft="@drawable/ic_person_black_24dp"
                                 android:ems="20"
+                                android:fontFamily="sans-serif-light"
+                                android:inputType="textEmailAddress"
+                                android:outlineAmbientShadowColor="@color/colorBranco"
+                                android:outlineSpotShadowColor="@color/colorBranco"
+                                android:padding="10dp"
                                 android:shadowColor="@color/colorBranco"
                                 android:textColor="@color/colorBranco"
-                                android:textColorHint="@color/colorBranco"
-                                android:outlineSpotShadowColor="@color/colorBranco"
-                                android:outlineAmbientShadowColor="@color/colorBranco"
                                 android:textColorHighlight="@color/colorBranco"
-                                android:textColorLink="@color/colorBranco"
-                                android:padding="10dp"
-                                android:inputType="textEmailAddress"/>
+                                android:textColorHint="@color/colorBranco"
+                                android:textColorLink="@color/colorBranco" />
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -107,26 +107,27 @@
                         android:textColorHint="@color/colorBranco"
                         app:passwordToggleTint="@color/colorBranco"
                         android:layout_margin="10dp">
+
                         <EditText
                             android:id="@+id/editText_SenhaCadastro"
-                            android:layout_width="310dp"
+                            android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:layout_gravity="center"
                             android:layout_marginTop="15dp"
                             android:background="@drawable/et_bg"
-                            android:fontFamily="sans-serif-light"
-                            android:shadowColor="@color/colorBranco"
-                            android:textColor="@color/colorBranco"
-                            android:textColorHint="@color/colorBranco"
-                            android:outlineSpotShadowColor="@color/colorBranco"
-                            android:outlineAmbientShadowColor="@color/colorBranco"
-                            android:textColorHighlight="@color/colorBranco"
-                            android:textColorLink="@color/colorBranco"
-                            android:padding="10dp"
                             android:drawableStart="@drawable/ic_password_black_24dp"
                             android:drawableLeft="@drawable/ic_password_black_24dp"
                             android:ems="20"
-                            android:inputType="textPassword"/>
+                            android:fontFamily="sans-serif-light"
+                            android:inputType="textPassword"
+                            android:outlineAmbientShadowColor="@color/colorBranco"
+                            android:outlineSpotShadowColor="@color/colorBranco"
+                            android:padding="10dp"
+                            android:shadowColor="@color/colorBranco"
+                            android:textColor="@color/colorBranco"
+                            android:textColorHighlight="@color/colorBranco"
+                            android:textColorHint="@color/colorBranco"
+                            android:textColorLink="@color/colorBranco" />
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
@@ -149,26 +150,27 @@
                         android:textColorHint="@color/colorBranco"
                         app:passwordToggleTint="@color/colorBranco"
                         android:layout_margin="10dp">
+
                         <EditText
                             android:id="@+id/editText_SenhaRepetirCadastro"
-                            android:layout_width="310dp"
+                            android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:layout_gravity="center"
                             android:layout_marginTop="15dp"
                             android:background="@drawable/et_bg"
-                            android:fontFamily="sans-serif-light"
-                            android:shadowColor="@color/colorBranco"
-                            android:textColor="@color/colorBranco"
-                            android:textColorHint="@color/colorBranco"
-                            android:outlineSpotShadowColor="@color/colorBranco"
-                            android:outlineAmbientShadowColor="@color/colorBranco"
-                            android:textColorHighlight="@color/colorBranco"
-                            android:textColorLink="@color/colorBranco"
-                            android:padding="10dp"
                             android:drawableStart="@drawable/ic_password_black_24dp"
                             android:drawableLeft="@drawable/ic_password_black_24dp"
                             android:ems="20"
-                            android:inputType="textPassword"/>
+                            android:fontFamily="sans-serif-light"
+                            android:inputType="textPassword"
+                            android:outlineAmbientShadowColor="@color/colorBranco"
+                            android:outlineSpotShadowColor="@color/colorBranco"
+                            android:padding="10dp"
+                            android:shadowColor="@color/colorBranco"
+                            android:textColor="@color/colorBranco"
+                            android:textColorHighlight="@color/colorBranco"
+                            android:textColorHint="@color/colorBranco"
+                            android:textColorLink="@color/colorBranco" />
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>

@@ -77,7 +77,7 @@
 
                             <EditText
                                 android:id="@+id/editText_EmailRecuperar"
-                                android:layout_width="310dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="48dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="24dp"

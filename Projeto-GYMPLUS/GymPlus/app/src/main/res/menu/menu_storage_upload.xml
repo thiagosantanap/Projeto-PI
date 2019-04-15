@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Obter Imagem:">
+
+        <menu>
+
+            <item
+                android:id="@+id/item_galeria"
+                android:title="Galeria"
+                android:icon="@drawable/ic_photo_library_black_24dp"
+                app:showAsAction="always"/>
+
+            <item
+                android:id="@+id/item_camera"
+                android:title="Tirar Foto"
+                android:icon="@drawable/ic_photo_camera_black_24dp"
+                app:showAsAction="always"/>
+
+        </menu>
+
+    </item>
+
+</menu>

@@ -1,15 +1,18 @@
 package com.example.gymplus;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.gymplus.util.Permissao;
+import com.example.gymplus.util.Util;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         servicosAutenticacao();
         servicosFacebook();
         servicosGoogle();
+        permissao();
     }
 
     // ------------------------------------------------------------ SERVIÇOS LOGIN ------------------------------------------------------------
@@ -249,6 +253,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStop();
         if(authStateListener != null){
             auth.removeAuthStateListener(authStateListener);
+        }
+    }
+
+
+    // ------------------------------------------------------------ PERMISSÕES USUÁRIO ----------------------------------------------------------------
+
+    private void permissao(){
+
+        String permissoes[] = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+
+        Permissao.permissao(this, 0, permissoes);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        for(int result: grantResults){
+            if(result == PackageManager.PERMISSION_DENIED){
+                Toast.makeText(this, "Aceite as permissões para o aplicativo funcionar corretamente", Toast.LENGTH_LONG).show();
+                finish();
+                break;
+            }
         }
     }
 }

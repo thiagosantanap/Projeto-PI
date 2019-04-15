@@ -3,31 +3,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.gymplus">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:launchMode="singleTop"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:launchMode="singleTop"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".LoginEmailActivity"></activity>
-        <activity android:name=".RecuperarActivity"></activity>
-        <activity android:name=".PrincipalActivity" />
-        <activity android:name=".Abertura">
+        <activity android:name=".storage.StorageUploadActivity"></activity>
+        <activity android:name=".storage.StorageDownloadActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginEmailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RecuperarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PrincipalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CadastrarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Abertura"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CadastrarActivity" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"
-            tools:replace="android:value"/>
+            tools:replace="android:value" />
+
+        <provider
+            android:authorities="com.example.gymplus"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            android:name="android.support.v4.content.FileProvider">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider"/>
+        </provider>
+
     </application>
 
 </manifest>

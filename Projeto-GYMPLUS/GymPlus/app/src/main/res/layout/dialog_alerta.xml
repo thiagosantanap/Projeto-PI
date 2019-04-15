@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    >
+    <TextView
+        android:id="@+id/textView_DialogAlerta_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="14"
+        android:fontFamily="sans-serif"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textView_DialogAlerta_MSG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="14"
+        android:fontFamily="sans-serif-condensed"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+    <Button
+        android:id="@+id/button_DialogAlerta_OK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        />
+</LinearLayout>
