@@ -34,4 +34,3 @@ def mergeSort(lista):
             lista[k]=listaDaDireita[j]
             j += 1
             k += 1
-
