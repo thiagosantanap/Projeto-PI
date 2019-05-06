@@ -19,7 +19,7 @@ firebase = pyrebase.initialize_app(config)
 
 from firebase import firebase
 import json
-from ordenacao import merge, bubble, insert, selection, quick, gnome, heap, comb, shell, otherquick
+from ordenacao import merge, bubble, insert, selection, quick, gnome, heap
 import timeit
 
 firebase = firebase.FirebaseApplication('https://gumplus-9d995.firebaseio.com', None)
@@ -54,14 +54,11 @@ filtro_4 = filtro.copy()
 filtro_5 = filtro.copy()
 filtro_6 = filtro.copy()
 filtro_7 = filtro.copy()
-filtro_8 = filtro.copy()
-filtro_9 = filtro.copy()
-filtro_10 = filtro.copy()
 
 print()
 
 def arredondar(num):
-    return float('%.20g'%( num))
+    return float( '%g' % ( num ) )
 
 lista_tempo = []
 
@@ -107,31 +104,13 @@ fim = timeit.default_timer()
 duracao = fim - inicio
 lista_tempo.append(arredondar(duracao))
 print ('Duracao Heap: %f' % (duracao))
-inicio = timeit.default_timer()
-ordenado_8 = comb.combSort(filtro_8)
-fim = timeit.default_timer()
-duracao = fim - inicio
-lista_tempo.append(arredondar(duracao))
-print ('Duracao Comb: %f' % (duracao))
-inicio = timeit.default_timer()
-ordenado_9 = shell.shellSort(filtro_9)
-fim = timeit.default_timer()
-duracao = fim - inicio
-lista_tempo.append(arredondar(duracao))
-print ('Duracao Shell: %f' % (duracao))
-inicio = timeit.default_timer()
-ordenado_10 = otherquick.quick(filtro_10, 0, len(filtro_10))
-fim = timeit.default_timer()
-duracao = fim - inicio
-lista_tempo.append(arredondar(duracao))
-print ('Duracao Other: %f' % (duracao))
 
 print()
 print('Menor:', min(lista_tempo))
 print('Maior:', max(lista_tempo))
 
-lista = [{"Nome":filtro_4[elemento][0], "Nota":filtro_4[elemento][1], "Endereco":filtro_4[elemento][2]} 
-            for elemento in range(len(filtro_4))]
+lista = [{"Nome":filtro_5[elemento][0], "Nota":filtro_5[elemento][1], "Endereco":filtro_5[elemento][2]} 
+            for elemento in range(len(filtro_5))]
 
 print(lista)
 
@@ -158,22 +137,5 @@ print(parsed_json)
 
 post = firebase.put('.', '/Profissional', result["Profissional"])
 print(post)
-print()
-print(lista_tempo)
-
-algoritmos = [elemento for elemento in range(1, 10)]
-print(algoritmos)
-
-
-from matplotlib import pyplot as plt
-
-nomes = ("Bubble", "Merge", "Selection", "Quick", "Insertion", "Gnome", "Heap", "Comb", "Shell", "Other")
-
-plt.figure(0, figsize=(15, 6))
-plt.bar(nomes, lista_tempo, width = 0.7, bottom = 0, linewidth = 2.0, align = 'center')
-plt.title('Elementos ordenados')
-plt.xlabel('Algoritmos', fontsize = 15)
-plt.ylabel('Tempo de Execução', fontsize = 15)
-plt.savefig('Figura_2.pdf')    
 
 
